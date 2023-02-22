@@ -1,0 +1,7 @@
+fastapi==0.75.2
+line-bot-sdk==2.4.1
+python-dotenv==0.21.0
+numpy==1.23.1
+pythainlp==3.0.8
+emoji==2.2.0
+dill

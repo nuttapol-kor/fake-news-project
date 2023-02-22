@@ -1,0 +1,14 @@
+*.pdf
+paraphrase-multilingual-mpnet-base-v2/
+content/
+all-mpnet-base-v2/
+line_bot/botnoiengine/
+rnn_lstm_model/
+summarize/
+THSarabunNew/
+LimeSoda/
+transformer_model/
+venv/
+text_classification_wongnai.ipynb
+*.zip
+*.env
