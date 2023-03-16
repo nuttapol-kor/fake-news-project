@@ -25,49 +25,61 @@ async def callback(request: Request):
         event_handle(event)
 
 def event_handle(event):
-    print(event)
-    print(event["type"])
+    event_type = event["type"]
+    if not event_type:
+        print("Error: event type not found")
+        return ""
+    
     try:
-        userId = event['source']['userId']
-    except:
-        print('error cannot get userId')
-        return ''
-    try:
-        rtoken = event['replyToken']
-    except:
-        print('error cannot get rtoken')
-        return ''
-    # try:
-    #     msgType = event["type"]
-    # except:
-    #     print('error cannot get msgID, and msgType')
-    #     sk_id = np.random.randint(1,17)
-    #     replyObj = StickerSendMessage(package_id=str(1),sticker_id=str(sk_id))
-    #     line_bot_api.reply_message(rtoken, replyObj)
-    #     return ''
-    if event["type"] == "postback":
-        action = event['postback']['data']
-        if action.startswith('action=summarize'):
-            text = action.split('=')[2]
-            summary = f"summarized text: {text}"
-            replyObj = TextSendMessage(text=summary)
-    elif event["type"] == "message":
-        if event["message"]["type"] == "text":
-            msg = str(event["message"]["text"])
-            predicted_res = logistic_regression_best(msg)
-            if predicted_res['class'] == 0:
-                template_pic = check_mark_pic
-                result_string = "ข่าวจริง"
-            else:
-                template_pic = cross_mark_pic
-                result_string = "ข่าวปลอม"
-            replyObj = create_template_message(template_pic, result_string, predicted_res['confident'], msg)
-            print(event)
-        else:
-            sk_id = np.random.randint(1,17)
-            replyObj = StickerSendMessage(package_id=str(1),sticker_id=str(sk_id))
-    line_bot_api.reply_message(rtoken, replyObj)
-    return ''
+        user_id = event["source"]["userId"]
+        reply_token = event["replyToken"]
+    except KeyError as e:
+        print(f"Error: cannot get {e}")
+        return ""
+
+    if event_type == "postback":
+        handle_postback(event)
+    elif event_type == "message":
+        handle_message(event, reply_token)
+    else:
+         print(f"Error: unsupported event type '{event_type}'")
+    return ""
+
+def handle_postback(event):
+    action = event["postback"]["data"]
+    if action.startswith("action=summarize"):
+        text = action.split('=')[2]
+        summary = f"summarized text: {text}"
+        reply_obj = TextSendMessage(text=summary)
+        line_bot_api.reply_message(event["replyToken"], reply_obj)
+
+def handle_message(event, reply_token):
+    message_type = event["message"]["type"]
+    if not message_type:
+        print("Error: message type not found")
+        return
+
+    if message_type == "text":
+        handle_text_message(event, reply_token)
+    else:
+        handle_non_text_message(reply_token)
+
+def handle_text_message(event, reply_token):
+    message = str(event['message']['text'])
+    predicted_res = logistic_regression_best(message)
+    if predicted_res['class'] == 0:
+        template_pic = check_mark_pic
+        result_string = "ข่าวจริง"
+    else:
+        template_pic = cross_mark_pic
+        result_string = "ข่าวปลอม"
+    reply_obj = create_template_message(template_pic, result_string, predicted_res['confident'], message)
+    line_bot_api.reply_message(reply_token, reply_obj)
+
+def handle_non_text_message(reply_token):
+    sticker_id = np.random.randint(1, 17)
+    reply_obj = StickerSendMessage(package_id=str(1), sticker_id=str(sticker_id))
+    line_bot_api.reply_message(reply_token, reply_obj)
 
 def create_template_message(picture, result_string, predicted_res, original_text):
 
