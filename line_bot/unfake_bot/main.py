@@ -10,8 +10,8 @@ app = FastAPI()
 
 load_dotenv()
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
-check_mark_pic = "https://cdn.pixabay.com/photo/2016/03/31/14/37/check-mark-1292787_1280.png"
-cross_mark_pic = "https://em-content.zobj.net/source/skype/289/cross-mark_274c.png"
+check_mark_pic = "https://i.imgur.com/HlVO2kS.png"
+cross_mark_pic = "https://i.imgur.com/BrXDQQC.png"
 
 @app.get("/")
 def root():
@@ -77,8 +77,9 @@ def handle_text_message(event, reply_token):
     line_bot_api.reply_message(reply_token, reply_obj)
 
 def handle_non_text_message(reply_token):
-    sticker_id = np.random.randint(1, 17)
-    reply_obj = StickerSendMessage(package_id=str(1), sticker_id=str(sticker_id))
+    # sticker_id = np.random.randint(1, 17)
+    # reply_obj = StickerSendMessage(package_id=str(1), sticker_id=str(sticker_id))
+    reply_obj = TextSendMessage(text='ลองส่งข่าวที่เป็นตัวอักษรมาเเล้วทางเรา จะตรวจสอบให้นะครับ')
     line_bot_api.reply_message(reply_token, reply_obj)
 
 def create_template_message(picture, result_string, predicted_res, original_text):
