@@ -7,3 +7,4 @@ emoji==2.2.0
 uvicorn
 scikit-learn
 dill
+transformers

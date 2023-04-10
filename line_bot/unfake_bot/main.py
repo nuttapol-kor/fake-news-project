@@ -5,6 +5,7 @@ from linebot import LineBotApi
 from linebot.models import StickerSendMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, PostbackAction
 from dotenv import load_dotenv
 from repo.text_classification import logistic_regression_best
+from repo.text_summarize import summarize
 
 app = FastAPI()
 
@@ -49,7 +50,7 @@ def handle_postback(event):
     action = event["postback"]["data"]
     if action.startswith("action=summarize"):
         text = action.split('=')[2]
-        summary = f"summarized text: {text}"
+        summary = text
         reply_obj = TextSendMessage(text=summary)
         line_bot_api.reply_message(event["replyToken"], reply_obj)
 
@@ -73,7 +74,11 @@ def handle_text_message(event, reply_token):
     else:
         template_pic = cross_mark_pic
         result_string = "ข่าวปลอม"
-    reply_obj = create_template_message(template_pic, result_string, predicted_res['confident'], message)
+    if len(message) > 150:
+        summarize_msg = summarize(message)
+    else:
+        summarize_msg = message
+    reply_obj = create_template_message(template_pic, result_string, predicted_res['confident'], summarize_msg)
     line_bot_api.reply_message(reply_token, reply_obj)
 
 def handle_non_text_message(reply_token):
