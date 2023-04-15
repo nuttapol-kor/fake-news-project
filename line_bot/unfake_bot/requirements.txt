@@ -4,7 +4,8 @@ python-dotenv==0.21.0
 numpy==1.23.1
 pythainlp==3.0.8
 emoji==2.2.0
-uvicorn
-scikit-learn
-dill
-transformers
+uvicorn==0.17.6
+scikit-learn==1.0.2
+dill==0.3.6
+transformers[torch]
+mangum==0.17.0

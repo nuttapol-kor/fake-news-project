@@ -1,4 +1,5 @@
-import pythainlp
+from pythainlp.util import normalize
+from pythainlp import word_tokenize
 import unicodedata
 import emoji
 import re
@@ -60,7 +61,7 @@ def ungroup_emoji(toks):
 
 def preprocess_text(text):
     new_text = unicodedata.normalize('NFKD', text)
-    new_text = pythainlp.util.normalize(new_text)
+    new_text = normalize(new_text)
     new_text = normalize_double_quote(new_text)
     new_text = normalize_single_quote(new_text)
 
@@ -68,7 +69,7 @@ def preprocess_text(text):
     new_text = replace_url(new_text)
     new_text = replace_rep(new_text)
 
-    res = [word for word in pythainlp.word_tokenize(new_text) if word and not re.search(pattern=r"\s+", string=word)]
+    res = [word for word in word_tokenize(new_text) if word and not re.search(pattern=r"\s+", string=word)]
 
     res = ungroup_emoji(res)
     return res

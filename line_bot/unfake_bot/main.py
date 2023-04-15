@@ -6,8 +6,22 @@ from linebot.models import StickerSendMessage, TextSendMessage, TemplateSendMess
 from dotenv import load_dotenv
 from repo.text_classification import logistic_regression_best
 from repo.text_summarize import summarize
+import uvicorn
+from mangum import Mangum
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+handler = Mangum(app)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 load_dotenv()
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
@@ -106,3 +120,6 @@ def create_template_message(picture, result_string, predicted_res, original_text
     )
 
     return buttons_template_message
+
+if __name__ == "__main__":
+    uvicorn.run(app, port=8000)
