@@ -64,8 +64,6 @@ Here's why:
 
 Our project aims to detect and summarize fake news; however, the user is required to manually send the news to our Line bot as it cannot be added to a Line group to filter incoming news. Therefore, as part of our future work, we plan to develop a model for news classification, which will enable our bot to automatically detect news articles and provide a summarized version of the article as well as classify it as real or fake. Once the bot has detected and classified the news, it will then send the result to the user's designated group
 
-Use the `BLANK_README.md` to get started.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -161,6 +159,13 @@ You can send news as a text message to the line bot to check the news is fake or
 As you can see, the response message has a result and "สรุปข่าว" button. When user click on the button, our bot will send the summarize news message to the user.
 
 ![Imgur](https://i.imgur.com/9fhKB0G.png)
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
 ## Contact
