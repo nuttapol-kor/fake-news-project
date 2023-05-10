@@ -13,7 +13,7 @@
     Thai Fake news detection and summarization using LINE Bot
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://youtu.be/rq8f50ldQZI">View Demo</a>
     ·
     <a href="https://github.com/nuttapol-kor/fake-news-project/issues">Report Bug</a>
     ·
