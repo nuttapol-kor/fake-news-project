@@ -13,11 +13,11 @@
     Thai Fake news detection and summarization using LINE Bot
     <br />
     <br />
-    <a href="https://youtu.be/rq8f50ldQZI">View Demo</a>
+    <a href="https://youtu.be/rq8f50ldQZI" target="_blank">View Demo</a>
     ·
-    <a href="https://github.com/nuttapol-kor/fake-news-project/issues">Report Bug</a>
+    <a href="https://github.com/nuttapol-kor/fake-news-project/issues" target="_blank">Report Bug</a>
     ·
-    <a href="https://github.com/nuttapol-kor/fake-news-project/issues">Request Feature</a>
+    <a href="https://github.com/nuttapol-kor/fake-news-project/issues" target="_blank">Request Feature</a>
   </p>
 </div>
 
