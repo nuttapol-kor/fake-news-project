@@ -95,6 +95,8 @@ You have to install the python 3.10 or higher version on your machine and run th
 
 Install ngrok -> https://ngrok.com/download
 
+Download summarize models -> https://drive.google.com/file/d/1EJJ1Rme8D_ia7efNTr00Nqr41MsTSVvL/view?usp=sharing
+
 ### Installation
 
 If python is installed on your machine. You are ready to do a following instruction
@@ -147,7 +149,9 @@ If python is installed on your machine. You are ready to do a following instruct
 
    ![Imgur](https://i.imgur.com/0kgofZ4.png)
 
-10. Happy with our Line bot!!
+10. Unzip summarize models that you download from Prerequisites part (e5_1.zip) and place `e5_1` to `line_bot\unfake_bot\models` directory
+
+11. Happy with our Line bot!!
 
 <!-- USAGE EXAMPLES -->
 ## Usage
